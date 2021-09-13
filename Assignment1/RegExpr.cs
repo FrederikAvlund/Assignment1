@@ -1,10 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace Assignment1
 {
     public static class RegExpr
     {
+        public static void Main(string[] args)
+        {
+        }
         public static IEnumerable<string> SplitLine(IEnumerable<string> lines)
         {
             throw new NotImplementedException();
@@ -12,7 +16,13 @@ namespace Assignment1
 
         public static IEnumerable<(int width, int height)> Resolution(string resolutions)
         {
-            throw new NotImplementedException();
+            string pattern = @"(?<firstYear>\d+)([x])(?<secondYear>\d+)";
+
+            foreach (Match match in Regex.Matches(resolutions, pattern))
+            {
+                yield return (Int32.Parse(match.Groups["firstYear"].Value), Int32.Parse(match.Groups["secondYear"].Value));
+            }
+
         }
 
         public static IEnumerable<string> InnerText(string html, string tag)
