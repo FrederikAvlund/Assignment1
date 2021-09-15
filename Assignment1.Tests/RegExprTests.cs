@@ -6,6 +6,32 @@ namespace Assignment1.Tests
     public class RegExprTests
     {
         [Fact]
+        public void SplitLine_splits_into_words()
+        {
+            string input1 = "Hello this is a test";
+            string input2 = "This is also a test with numbers123";
+            List<string> lines = new List<string>();
+            lines.Add(input1);
+            lines.Add(input2);
+
+            var expected = new List<string>();
+            expected.Add("Hello");
+            expected.Add("this");
+            expected.Add("is");
+            expected.Add("a");
+            expected.Add("test");
+            expected.Add("This");
+            expected.Add("is");
+            expected.Add("also");
+            expected.Add("a");
+            expected.Add("test");
+            expected.Add("with");
+            expected.Add("numbers123");
+
+            Assert.Equal(expected, RegExpr.SplitLine(lines));        
+        }
+
+        [Fact]
         public void Resolution_takes_1404x2495_returns_1404_2495()
         {
 
@@ -58,3 +84,4 @@ namespace Assignment1.Tests
 
     }
 }
+
