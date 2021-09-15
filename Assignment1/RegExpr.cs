@@ -6,9 +6,20 @@ namespace Assignment1
 {
     public static class RegExpr
     {
-        public static IEnumerable<string> SplitLine(IEnumerable<string> lines)
+
+        static void Main(string[] args)
         {
-            throw new NotImplementedException();
+        }
+        
+       public static IEnumerable<string> SplitLine(IEnumerable<string> lines)
+        {
+            string strRegex = "[^a-zA-Z0-9]";
+            foreach (string s in lines) {
+                foreach (var match in Regex.Split(s, strRegex))
+                {
+                    yield return match;
+                }
+            }
         }
 
         public static IEnumerable<(int width, int height)> Resolution(string resolutions)
@@ -19,8 +30,8 @@ namespace Assignment1
             {
                 yield return (Int32.Parse(match.Groups["firstYear"].Value), Int32.Parse(match.Groups["secondYear"].Value));
             }
-
         }
+
         public static IEnumerable<string> InnerText(string html, string tag)
         {
             string pattern = @$"<{tag}.*?>(.*?)<\/{tag}>*";
