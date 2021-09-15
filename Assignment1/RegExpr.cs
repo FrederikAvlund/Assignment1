@@ -6,9 +6,6 @@ namespace Assignment1
 {
     public static class RegExpr
     {
-        public static void Main(string[] args)
-        {
-        }
         public static IEnumerable<string> SplitLine(IEnumerable<string> lines)
         {
             throw new NotImplementedException();
@@ -24,10 +21,16 @@ namespace Assignment1
             }
 
         }
-
         public static IEnumerable<string> InnerText(string html, string tag)
         {
-            throw new NotImplementedException();
+            string pattern = @$"<{tag}.*?>(.*?)<\/{tag}>*";
+
+            string removesOtherTags = @"<\/?[a-z]{0,10}>";
+
+            foreach (Match match in Regex.Matches(html, pattern))
+            {
+                yield return Regex.Replace(match.Groups[1].Value, removesOtherTags, "").Trim();
+            }
         }
     }
 }
